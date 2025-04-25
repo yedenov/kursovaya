@@ -27,7 +27,7 @@
 
 1. Клонируйте репозиторий:
 ```bash
-git clone https://github.com/your-username/attendance-system.git
+git clone https://github.com/yedenov/kursovaya.git
 ```
 
 2. Откройте решение в Visual Studio или Visual Studio Code
