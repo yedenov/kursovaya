@@ -1,0 +1,52 @@
+﻿@model aspnetcore.Models.Attendance
+
+@{
+    ViewData["Title"] = "Добавить запись посещаемости";
+}
+
+<h1>Добавить запись посещаемости</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form action="/Attendances/Create" method="post">
+            @Html.AntiForgeryToken()
+            
+            <div class="form-group">
+                <label for="StudentId">Студент</label>
+                <select name="StudentId" id="StudentId" class="form-control" required>
+                    <option value="">-- Выберите студента --</option>
+                    @foreach (var student in ViewBag.StudentId)
+                    {
+                        <option value="@student.Value">@student.Text</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="LessonId">Занятие</label>
+                <select name="LessonId" id="LessonId" class="form-control" required>
+                    <option value="">-- Выберите занятие --</option>
+                    @foreach (var lesson in ViewBag.LessonId)
+                    {
+                        <option value="@lesson.Value">@lesson.Text</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group form-check">
+                <input type="checkbox" name="IsPresent" id="IsPresent" class="form-check-input" value="true" />
+                <input type="hidden" name="IsPresent" value="false" />
+                <label for="IsPresent" class="form-check-label">Присутствовал</label>
+            </div>
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+                <a href="/Attendances" class="btn btn-secondary">Назад</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

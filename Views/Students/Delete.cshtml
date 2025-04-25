@@ -1,0 +1,27 @@
+﻿@model aspnetcore.Models.Student
+
+@{
+    ViewData["Title"] = "Удалить студента";
+}
+
+<h1>Удалить студента</h1>
+
+<div class="alert alert-danger">
+    <h4>Вы уверены, что хотите удалить этого студента?</h4>
+    <p>Это действие нельзя будет отменить.</p>
+</div>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">Имя</dt>
+        <dd class="col-sm-10">@Model.Name</dd>
+    </dl>
+
+    <form action="/Students/Delete/@Model.Id" method="post">
+        @Html.AntiForgeryToken()
+        <div class="form-group mt-3">
+            <button type="submit" class="btn btn-danger">Удалить</button>
+            <a href="/Students" class="btn btn-secondary">Отмена</a>
+        </div>
+    </form>
+</div>

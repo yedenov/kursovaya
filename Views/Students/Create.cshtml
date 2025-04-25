@@ -1,0 +1,27 @@
+﻿@model aspnetcore.Models.Student
+
+@{
+    ViewData["Title"] = "Создать студента";
+}
+
+<h1>Создать студента</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form action="/Students/Create" method="post">
+            <div class="form-group">
+                <label for="Name">Имя студента</label>
+                <input type="text" class="form-control" id="Name" name="Name" required />
+            </div>
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary">Создать</button>
+                <a href="/Students" class="btn btn-secondary">Вернуться к списку</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

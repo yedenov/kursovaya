@@ -1,0 +1,32 @@
+﻿@model IEnumerable<aspnetcore.Models.Lesson>
+
+@{
+    ViewData["Title"] = "Занятия";
+}
+
+<h1>Занятия</h1>
+
+<p><a asp-action="Create" class="btn btn-primary">Добавить занятие</a></p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Предмет</th>
+            <th>Дата</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Subject</td>
+                <td>@item.Date.ToShortDateString()</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Изменить</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
