@@ -16,10 +16,34 @@ public class StudentsController : Controller
     }
 
     // GET: Students
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string sortOrder, string searchString, int? pageNumber)
     {
         _logger.LogInformation("Открытие списка студентов");
-        return View(await _context.Students.ToListAsync());
+
+        ViewData["CurrentSort"] = sortOrder;
+        ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+        ViewData["CurrentFilter"] = searchString;
+
+        var students = from s in _context.Students
+                      select s;
+
+        if (!String.IsNullOrEmpty(searchString))
+        {
+            students = students.Where(s => s.Name.Contains(searchString));
+        }
+
+        switch (sortOrder)
+        {
+            case "name_desc":
+                students = students.OrderByDescending(s => s.Name);
+                break;
+            default:
+                students = students.OrderBy(s => s.Name);
+                break;
+        }
+
+        int pageSize = 10;
+        return View(await PaginatedList<Student>.CreateAsync(students.AsNoTracking(), pageNumber ?? 1, pageSize));
     }
 
     // GET: Students/Create
