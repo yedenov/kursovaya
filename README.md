@@ -28,7 +28,11 @@
 
 1. Клонируйте репозиторий:
 ```bash
+<<<<<<< HEAD
 git clone [url-репозитория]
+=======
+git clone https://github.com/yedenov/kursovaya.git
+>>>>>>> a6467fcbdd7fb08a2ca2aee23e0cc5c937087937
 ```
 
 2. Откройте решение в Visual Studio или Rider
